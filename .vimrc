@@ -1,46 +1,67 @@
+" Build a custom vim:
+" git clone https://github.com/vim/vim.git
+" cd vim
+" ./configure --with-features=huge --enable-multibyte --enable-python3interp=yes --with-python3-config-dir=$(python3-config --configdir) --with-x --enable-gui --prefix=/usr/
+" sudo make install
+" check it works: vim --verison
+" mkdir $HOME/.vim/swp $HOME/.vim/.backup $HOME/.vim/undodir
+set nocompatible
 syntax on
-set encoding=utf-8
+set backspace=indent,eol,start
 
-set tabstop=4 
-set shiftwidth=4
-set smartindent
+"PEP 8 for python
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
 
-set belloff=all
+"Fullstack stuff
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
 
-set noswapfile
-set nobackup
-set undodir=~/.vim/undodir
-set undofile
+"highlight whitespace at end of line
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
-set showcmd
-
+set title
+set autoindent
 set wildmenu
 
-set clipboard=unnamed
+set history=1000
+set showcmd
+set showmode
 
-set relativenumber
+set encoding=utf-8
+
+set noerrorbells
+
+set directory=$HOME/.vim/swp//
+set backupdir=$HOME/.vim/.backup//
+set undofile
+set undodir=$HOME/.vim/undodir//
+
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 30
+
+set cursorline
+
+set laststatus=2
+
 set number
+set relativenumber
 
-colorscheme desert
+set smartcase
 
-set incsearch
-set nohlsearch
-
-set colorcolumn=80
 set scrolloff=8
 
 inoremap jk <ESC>
-let mapleader=","
-
-call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'ctrlpvim/ctrlp.vim'
-call plug#end()
-
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
-nnoremap <leader>s :wincmd v<CR>
-nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
