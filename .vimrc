@@ -26,7 +26,7 @@ au BufNewFile,BufRead *.js, *.html, *.css
     \ set shiftwidth=2
 
 "highlight whitespace at end of line
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match ErrorMsg /\s\+$/
 
 set title
 set autoindent
@@ -61,10 +61,15 @@ set smartcase
 set scrolloff=8
 
 inoremap jk <ESC>
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
+nmap <C-H> <C-W><C-H>
+nmap <C-L> <C-W><C-L>
+nmap <C-J> <C-W><C-J>
+nmap <C-K> <C-W><C-K>
+
+let mapleader = ","
 
 " Freed <C-l> in Netrw
-nmap <leader>l <Plug>NetrwRefresh
+nnoremap <leader>l <Plug>NetrwRefresh
+
+" Fly around buffers
+nnoremap <leader>b :ls<CR>:b<space>
